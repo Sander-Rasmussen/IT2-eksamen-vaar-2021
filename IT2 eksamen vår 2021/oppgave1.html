@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h4{
+            text-align: center;
+        }
+        #bilder{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img{
+            width: 100px;
+            margin: 50px;
+        }
+        #poeng{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #beskjed {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+       
+        .animasjon{
+            animation: animasjon 1s;
+        }
+        @keyframes animasjon{
+            0% { width: 0px;}
+            50%{width: 50px;}
+            100%{width: 100px;}
+        }
+    </style>
+</head>
+<body>
+    <h4>Myntkast</h4>
+
+    <input type="number" name="" id="runder" placeholder="Oppgi antall runder">
+    <button id="knapp">spill</button>
+
+    <div id="bilder">
+        <img id="kron" src="kron.png" alt="">
+        <img id="mynt" src="mynt.png" alt="">
+    </div>
+
+    <div id="poeng"></div>
+
+    <div id="beskjed"></div>
+
+    <script>
+        let poengEl= document.querySelector("#poeng")
+
+        let kronEl = document.querySelector("#kron")
+        let myntEl = document.querySelector("#mynt")
+
+        let knapp= document.querySelector("#knapp")
+        let antallRunderEl = document.querySelector("#runder")
+
+        let kron = document.createElement("img")
+        kron.src="kron.png"
+
+        let mynt = document.createElement("img")
+        mynt.src="mynt.png"
+
+        let beskjedEl = document.querySelector("#beskjed")
+        let bilder= document.querySelector("#bilder")
+
+        let riktige=0
+        let feil = 0
+
+        knapp.addEventListener("click", ()=>{
+            if (antallRunderEl.value%2==0){
+                alert("du må skrive inn et positivt oddetall")
+                return
+            }
+            
+
+           
+            let antallRunder= antallRunderEl.value
+            let rundeNr= 0;
+            poengEl.innerHTML="feil: " + feil + "   " + "riktige: " + riktige 
+            
+            kron.removeAttribute("class", "animasjon")
+            mynt.removeAttribute("class", "animasjon")
+          
+     
+            kronEl.addEventListener("click", ()=>{
+
+            
+                    rundeNr+=1
+
+                    console.log("du valgte kron")
+                    let random = Math.floor(Math.random()*2 ) //gir oss heltall mellom 1 og 2
+                    if (random == 0){
+                        beskjedEl.innerHTML=""
+                        beskjedEl.appendChild(kron)
+                        kron.setAttribute("class", "animasjon")
+                        riktige+=1
+                        poengEl.innerHTML="feil: " + feil + "   " + "riktige: " + riktige 
+                        beskjedEl.innerHTML+="<br>" + "du gjettet kron" +"<br>" + "Du gjettet riktig!"
+                        avsluttSpill(antallRunder, rundeNr)
+                    }
+                    else if (random ==1){
+                        beskjedEl.innerHTML=""
+                        beskjedEl.appendChild(mynt)
+                        mynt.setAttribute("class", "animasjon")
+                        feil+=1
+                        poengEl.innerHTML="feil: " + feil + "   " + "riktige: " + riktige 
+                        beskjedEl.innerHTML+="<br>" + "du gjettet kron " +"<br>" + "Du gjettet feil!"
+                        avsluttSpill(antallRunder, rundeNr)
+                    }
+                
+            })
+            myntEl.addEventListener("click", ()=>{
+               
+                    let random = Math.floor(Math.random()*2 ) //gir oss heltall mellom 1 og 2
+                    rundeNr+=1
+                    console.log("du valgte mynt")
+        
+                    if (random == 0){
+                        beskjedEl.innerHTML=""
+                        kron.setAttribute("class", "animasjon")
+                        beskjedEl.appendChild(kron)
+                        
+                        feil+=1
+                        poengEl.innerHTML="feil: " + feil + "   " + "riktige: " + riktige 
+                        beskjedEl.innerHTML+="<br>" + "du gjettet mynt" +"<br>" +"Du gjettet feil!"
+                        avsluttSpill(antallRunder, rundeNr)
+                    }
+                    else if (random ==1){
+                        beskjedEl.innerHTML=""
+                        beskjedEl.appendChild(mynt)
+                        mynt.setAttribute("class", "animasjon")
+                        riktige+=1
+                        
+                        poengEl.innerHTML="feil: " + feil + "   " + "riktige: " + riktige 
+                        beskjedEl.innerHTML+="<br>" + "du gjettet mynt "+ "<br>" +"Du gjettet riktig!"
+                        avsluttSpill(antallRunder, rundeNr)
+                    }
+                
+            })
+        
+        })
+        
+        function avsluttSpill(antallRunder,rundeNr){
+            if(antallRunder==rundeNr){
+                if (riktige>feil){
+                    bilder.innerHTML="spillet er ferdig, Du vant!"
+                }
+                else if (feil>riktige){
+                    bilder.innerHTML="spillet er ferdig, Du tapte!"
+                }
+                else if(feil==riktige){
+                    bilder.innerHTML="spillet er ferdig, Det ble uavgjort!"
+                }
+            }
+            else{
+                return
+            }
+       
+            
+        }
+    </script>
+</body>
+</html>

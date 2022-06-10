@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: rgb(255, 201, 74);
+ 
+    }
+    .aktiv{
+        background-color: red;
+        text-align: center;
+        padding: 5px;
+        width: 20%;
+        border-radius: 50px;
+    }
+    p{
+        width: 20%;
+        text-align: center;
+    }
+    .oppetall{
+        background-color: white;
+        border-radius: 50px;
+        width: 40px;
+        height: 40px;
+    }
+    .nedetall{
+        background-color: white;
+        border-radius: 50px;
+        width: 40px;
+        height: 40px;
+    }
+    .midtentall{
+        background-color: white;
+        border-radius: 50px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    #tallOverst{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+    }
+    #tallOverst div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+        background-color: yellow;
+    }
+    #tallmidten {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+        border-radius: 50px;
+    }
+    #tallmidten div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+       
+    }
+    #tallNederst div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+        background-color: yellow;
+    }
+    #tallNederst {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+    }
+    #innpakning{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #premie{
+        width: 100%;
+        margin-top: 50px ;
+    }
+</style>
+<body>
+   
+    <div id="innpakning">
+        <div>
+        <div id="tallOverst">
+            <div class="oppetall tall" id="overst5"></div>
+            <div class="oppetall tall"  id="overst4"></div>
+            <div class="oppetall tall"  id="overst3"></div>
+            <div class="oppetall tall"  id="overst2"></div>
+            <div class="oppetall tall"  id="overst1"></div>
+        </div>
+        <div id="tallmidten">
+            <div class="midtentall tall"  id="midten5"></div>
+            <div class="midtentall tall"  id="midten4"></div>
+            <div class="midtentall tall"  id="midten3"></div>
+            <div class="midtentall tall"  id="midten2"></div>
+            <div class="midtentall tall"  id="midten1"></div>
+        </div>
+        <div id="tallNederst">
+            <div class="nedetall tall" id="nederst5"></div>
+            <div class="nedetall tall" id="nederst4"></div>
+            <div class="nedetall tall"  id="nederst3"></div>
+            <div class="nedetall tall"  id="nederst2"></div>
+            <div class="nedetall tall"  id="nederst1"></div>
+        </div>
+    </div>
+        <div id="premie">
+            <p class="aktiv" value="412000" id="premie1">412 000 kr</p>
+            <p id="premie2" value="535000">535 000 kr</p>
+            <p id="premie3" value="722000">722 000 kr</p>
+            <p id="premie4" value="1010000">1 010 000 kr</p>
+            <p id="premie5" value="1464000">1 464 000 kr</p>
+            <p id="premie6" value="2196000">2 196 000 kr</p>
+        </div>
+    </div>  
+    <div id="knapper">
+        <button id="oppKnapp">Opp</button>
+        <button id="nedKnapp">Ned</button>
+    </div>
+   
+    
+    
+
+    <script>
+        window.onload=lastInn()
+
+        function lastInn(){
+
+        
+        let body= document.querySelector("body")
+
+        let oppe1= document.querySelector("#overst1")
+        let oppe2= document.querySelector("#overst2")
+        let oppe3= document.querySelector("#overst3")
+        let oppe4= document.querySelector("#overst4")
+        let oppe5= document.querySelector("#overst5")
+
+        let midten1 = document.querySelector("#midten1")
+        let midten2 = document.querySelector("#midten2")
+        let midten3 = document.querySelector("#midten3")
+        let midten4 = document.querySelector("#midten4")
+        let midten5 = document.querySelector("#midten5")
+
+        let nederst1 = document.querySelector("#nederst1")
+        let nederst2 = document.querySelector("#nederst2")
+        let nederst3 = document.querySelector("#nederst3")
+        let nederst4 = document.querySelector("#nederst4")
+        let nederst5 = document.querySelector("#nederst5")
+
+        let classTall= document.querySelector(".tall")
+        let classOppeTall = document.querySelector(".oppetall")
+        let classMidtenTall = document.querySelector(".midtentall")
+        let classNedeTall = document.querySelector(".nedetall")
+
+        let oppKnapp= document.querySelector("#oppKnapp")
+        let nedKnapp= document.querySelector("#nedKnapp")
+        let knapperEl=document.querySelector("#knapper")
+
+        let premie1 = document.querySelector("#premie1")
+        let premie2 = document.querySelector("#premie2")
+        let premie3 = document.querySelector("#premie3")
+        let premie4 = document.querySelector("#premie4")
+        let premie5 = document.querySelector("#premie5")
+        let premie6 = document.querySelector("#premie6")
+
+        //henter inn lyd
+        let riktigLyd=document.createElement("audio")
+        riktigLyd.src="riktig.mp3"
+        let feilLyd= document.createElement("audio")
+        feilLyd.src="feil.mp3"
+
+        let jokerBilde= document.createElement("img")
+        jokerBilde.src="joker.png"
+        let jokerLyd=document.createElement("audio")
+        jokerLyd.src="joker.mp3"
+        let jokerFilm= document.createElement("video")
+        jokerFilm.src="joker.mp4"
+
+        arrayOverst=[oppe1, oppe2, oppe3, oppe4, oppe5];
+        arrayMidten=[midten1, midten2, midten3, midten4, midten5];
+        arrayNederst=[nederst1, nederst2, nederst3, nederst4, nederst5];
+        premier=[premie1, premie2, premie3, premie4, premie5, premie6]
+        premieVerdier=[412000,535000,722000,1010000,1464000,2196000]
+
+        //lager løkker som gir tilfeldige tall i midten
+        for (let i=0;i<arrayMidten.length;i++){
+            let randomTall= Math.floor(Math.random()*10)
+         
+            console.log("random tall er" + randomTall)
+            arrayMidten[i].value=randomTall
+            arrayMidten[i].innerHTML=randomTall
+        }
+        //her starter vi koden når spillet startes
+        let radNr = 0
+        let poeng=0;
+     
+
+    //premier[2].setAttribute("class", "aktiv")
+    //premier[2].removeAttribute("class")
+
+        nedKnapp.addEventListener("click", ()=>{
+            let randomTall= Math.floor(Math.random()*11)
+            
+         
+                //her finner vi nederst tall i raden vi er kommet til, dereter økes nummer med 1
+                arrayNederst[radNr].innerHTML=randomTall
+                arrayNederst[radNr].value=randomTall  
+                arrayNederst[radNr].style.backgroundColor="white"
+
+                if(randomTall==10){
+                    arrayNederst[radNr].innerHTML=""
+                arrayNederst[radNr].appendChild(jokerBilde)
+                jokerBilde.style.width="30px"
+                jokerLyd.play()
+                body.appendChild(jokerFilm)
+                jokerFilm.play()
+                alert("gratulerer du har vunnet 2 196 000kr!")
+                premier[6].setAttribute("class", "aktiv")
+                knapperEl.innerHTML="" //for å ikke la spiller spille mer
+            }
+                if (randomTall<=arrayMidten[radNr].value){
+                    poeng+=1
+                    riktigLyd.play()
+                    console.log(poeng)
+                    for(let i=0;i<arrayNederst.length;i++){
+                        premier[i].removeAttribute("class")
+                    }
+                    premier[poeng].setAttribute("class", "aktiv")
+                }
+                else if (randomTall>arrayMidten[radNr].value){
+                    if (poeng<=0){
+                        poeng=0
+                        feilLyd.play()
+                    }
+                    else{
+                        poeng-=1
+                        feilLyd.play()
+                        console.log(poeng)
+                        for(let i=0;i<arrayNederst.length;i++){
+                        premier[i].removeAttribute("class")
+                        }
+                        premier[poeng].setAttribute("class", "aktiv")
+                    }
+                }
+             
+            
+                radNr+=1
+                console.log(radNr)
+                console.log("poeng: "+ poeng)
+
+                if(radNr==5){
+                    alert("spillet er over! Du vant "+ premieVerdier[poeng]+" kr")
+                }
+        })
+
+        oppKnapp.addEventListener("click", ()=>{
+            let randomTall= Math.floor(Math.random()*11)
+
+            
+   
+            //her finner vi nederst tall i raden vi er kommet til, dereter økes nummer med 1
+            arrayOverst[radNr].innerHTML=randomTall
+            arrayOverst[radNr].value=randomTall  
+            arrayOverst[radNr].style.backgroundColor="white"
+
+            //om randomTall = 10 så gjemmer jokeren seg der
+            if(randomTall==10){
+                arrayOverst[radNr].innerHTML=""
+                arrayOverst[radNr].appendChild(jokerBilde)
+                jokerBilde.style.width="30px"
+                jokerLyd.play()
+                body.appendChild(jokerFilm)
+                jokerFilm.play()
+                alert("gratulerer du har vunnet 2 196 000kr!")
+                knapperEl.innerHTML="" //for å ikke la spiller spille mer
+            }
+
+            if (randomTall<=arrayMidten[radNr].value){
+                poeng+=1
+                riktigLyd.play()
+                console.log(poeng)
+                for(let i=0;i<arrayOverst.length;i++){
+                    premier[i].removeAttribute("class")
+                }
+                premier[poeng].setAttribute("class", "aktiv")
+            }
+            else if (randomTall>arrayMidten[radNr].value){
+                if (poeng<=0){
+                    poeng=0
+                    feilLyd.play()
+                }
+                else{
+                    poeng-=1
+                    feilLyd.play()
+                    console.log(poeng)
+                    for(let i=0;i<arrayOverst.length;i++){
+                    premier[i].removeAttribute("class")
+                    }
+                    premier[poeng].setAttribute("class", "aktiv")
+                }
+            }
+            
+
+            radNr+=1
+            console.log(radNr)
+            console.log("poeng: "+ poeng)
+
+            if(radNr==5){
+                alert("spillet er over! Du vant "+ premieVerdier[poeng]+" kr")
+            }
+        })
+        
+
+
+
+
+        
+    }
+    </script>
+</body>
+</html>
